@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <section class="row hu">
+    <div class="col-sm-12 col-md-2" *ngFor="let product of products$ | async">
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+  </section>
+</div>
