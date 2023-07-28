@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from './services/product.service';
+import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [ProductService],
+  declarations: [],
   imports: [CommonModule],
 })
 export class CoreModule {}

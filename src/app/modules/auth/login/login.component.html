@@ -1,0 +1,12 @@
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <input type="text" name="name" required ngModel [(ngModel)]="user.name" />
+  <input
+    type="text"
+    name="pasword"
+    required
+    ngModel
+    [(ngModel)]="user.password"
+  />
+  <button type="submit" [disabled]="userForm['invalid']">submit</button>
+  {{ user | json }}
+</form>
