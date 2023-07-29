@@ -1,5 +1,24 @@
 <div class="container">
   <section class="row" [@slideIn]>
+    <div class="row">
+      <div class="col-sm-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Product Category</mat-label>
+          <mat-select
+            placeholder="Product Category"
+            [(ngModel)]="selectedCategory"
+            (selectionChange)="filterCategories()"
+          >
+            <mat-option
+              *ngFor="let category of categories$ | async"
+              [value]="category"
+              >{{ category }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
     <div class="col-sm-12 col-md-2" *ngFor="let product of products">
       <app-product-card [product]="product"></app-product-card>
     </div>
