@@ -8,4 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductCardComponent {
   @Input() product: Product | null = null;
+
+  roundRate(count: number) {
+    return Math.round(count);
+  }
 }

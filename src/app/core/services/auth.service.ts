@@ -1,3 +1,4 @@
+import { SnackBarService } from './snack-bar.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -9,7 +10,10 @@ import { User } from 'src/app/shared/models/user.model';
 export class AuthService {
   private user = new BehaviorSubject<User | null>(null);
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
   get isUserAuthenticated() {
     return this.user.value != null;
@@ -21,6 +25,7 @@ export class AuthService {
     } else if (user.name.toLowerCase() === 'admin' && user.password === '123') {
       this.router.navigate(['/admin-view']);
     } else {
+      this.snackBarService.openSnackBar('Wrong login Cridentials');
       return;
     }
     this.handleAuthentication(user);
@@ -29,6 +34,7 @@ export class AuthService {
   handleAuthentication(user: User) {
     localStorage.setItem('userData', JSON.stringify(user));
     this.user.next(user);
+    this.snackBarService.openSnackBar('Signed in Succesfully');
   }
 
   autoLogin() {

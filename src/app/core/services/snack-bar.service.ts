@@ -14,7 +14,7 @@ export class SnackBarService {
       duration: 3000,
     };
 
-    //TODO
+    //TODO fix  cssClass issue
     if (cssClass) {
       // If 'cssClass' is provided, add it to the 'panelClass' property
       snackBarConfig['panelClass'] = [cssClass];

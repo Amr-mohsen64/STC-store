@@ -25,3 +25,10 @@ body {
 mat-form-field {
   width: 100%;
 }
+
+.doted-text-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 200px;
+}

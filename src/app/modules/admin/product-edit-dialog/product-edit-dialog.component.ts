@@ -60,6 +60,7 @@ export class ProductEditDialogComponent implements OnInit {
   }
 
   onSaveProduct() {
+    //TODO:enhance observable
     const productObservable = new Observable();
 
     if (this.productForm.valid) {
