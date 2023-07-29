@@ -1,1 +1,4 @@
-<p>loader works!</p>
+<section [@fade]="loaderService.isLoading ? 'shown' : 'hidden'">
+  <div id="backdrop" *ngIf="loaderService.isLoading"></div>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</section>

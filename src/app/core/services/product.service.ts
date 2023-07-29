@@ -30,7 +30,11 @@ export class ProductService {
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.http.put<any>('https://fakestoreapi.com/products', product);
+    console.log(product);
+    return this.http.put<any>(
+      `https://fakestoreapi.com/products/${product.id}`,
+      product
+    );
   }
 
   deleteProduct(productId: number): Observable<any> {
