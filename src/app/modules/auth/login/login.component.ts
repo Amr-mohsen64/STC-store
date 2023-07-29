@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthService } from './../../../core/services/auth.service';
 
@@ -8,7 +8,7 @@ const emptyUser: User = { name: '', password: '' };
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   user: User = emptyUser;
   constructor(private authService: AuthService) {}
 
@@ -16,5 +16,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.signIn(this.user);
+  }
+
+  ngOnDestroy(): void {
+    this.user = emptyUser;
   }
 }
