@@ -1,6 +1,6 @@
 <div class="container">
-  <section class="row">
-    <div class="col-sm-12 col-md-2" *ngFor="let product of products" [@slideIn]>
+  <section class="row" [@slideIn]>
+    <div class="col-sm-12 col-md-2" *ngFor="let product of products">
       <app-product-card [product]="product"></app-product-card>
     </div>
   </section>

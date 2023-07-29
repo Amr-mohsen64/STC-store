@@ -6,11 +6,23 @@ import { Product } from 'src/app/shared/models/product.model';
 import { ProductDeleteDialogComponent } from '../product-delete-dialog/product-delete-dialog.component';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
 import { LoaderService } from './../../../core/services/loader.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-products-admin',
   templateUrl: './products-admin.component.html',
   styleUrls: ['./products-admin.component.scss'],
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate(
+          '500ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ProductsAdminComponent implements OnInit {
   products$!: Observable<Product[]>;
