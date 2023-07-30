@@ -27,7 +27,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class ProductsAdminComponent implements OnInit {
   products$!: Observable<Product[]>;
   products: Product[] = [];
-  displayedColumns: string[] = ['name', 'id', 'price', 'category', 'controls'];
+  displayedColumns: string[] = [
+    'name',
+    'id',
+    'price',
+    'category',
+    'image',
+    'controls',
+  ];
 
   constructor(
     private productService: ProductService,
