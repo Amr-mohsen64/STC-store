@@ -51,7 +51,7 @@ export class ProductsAdminComponent implements OnInit {
   addProduct() {
     this.dialog
       .open(ProductEditDialogComponent, {
-        width: '30%',
+        minWidth: '30%',
       })
       .afterClosed()
       .subscribe((value) => {
@@ -64,7 +64,7 @@ export class ProductsAdminComponent implements OnInit {
   editProduct(product: Product) {
     this.dialog
       .open(ProductEditDialogComponent, {
-        width: '30%',
+        minWidth: '30%',
         data: product,
       })
       .afterClosed()
@@ -78,7 +78,7 @@ export class ProductsAdminComponent implements OnInit {
   deleteProduct(productId: number) {
     this.dialog
       .open(ProductDeleteDialogComponent, {
-        width: '30%',
+        minWidth: '30%',
         data: productId,
       })
       .afterClosed()

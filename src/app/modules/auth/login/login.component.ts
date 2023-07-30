@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
 import { AuthService } from './../../../core/services/auth.service';
 
-const emptyUser: User = { name: '', password: '' };
+const emptyUser: User = { name: '', password: '', permissions: [] };
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

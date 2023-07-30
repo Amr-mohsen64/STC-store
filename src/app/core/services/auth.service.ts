@@ -8,7 +8,12 @@ import { User } from 'src/app/shared/models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private user = new BehaviorSubject<User | null>(null);
+  authUsers: User[] = [
+    { name: 'user', password: '123', permissions: ['user'] },
+    { name: 'admin', password: '123', permissions: ['admin'] },
+  ];
+
+  public user = new BehaviorSubject<User | null>(null);
 
   constructor(
     private router: Router,
@@ -19,16 +24,38 @@ export class AuthService {
     return this.user.value != null;
   }
 
+  checkUserAuth(loggedUser: User) {
+    let isFound = false;
+    let foundUser: User = { name: '', password: '', permissions: [] };
+    this.authUsers.forEach((user) => {
+      if (
+        loggedUser.name == user.name &&
+        loggedUser.password == user.password
+      ) {
+        foundUser = user;
+        isFound = true;
+      }
+    });
+    return {
+      user: foundUser,
+      isFound,
+    };
+  }
+
   signIn(user: User) {
-    if (user.name.toLowerCase() === 'user' && user.password === '123') {
-      this.router.navigate(['/user-view']);
-    } else if (user.name.toLowerCase() === 'admin' && user.password === '123') {
-      this.router.navigate(['/admin-view']);
+    if (this.checkUserAuth(user).isFound) {
+      const foundUser: User = this.checkUserAuth(user).user;
+
+      this.handleAuthentication(foundUser as unknown as User);
+      if (foundUser.permissions.includes('admin')) {
+        this.router.navigate(['/admin-view']);
+      } else if (foundUser.permissions.includes('user')) {
+        this.router.navigate(['/user-view']);
+      }
     } else {
       this.snackBarService.openSnackBar('Wrong login Cridentials');
       return;
     }
-    this.handleAuthentication(user);
   }
 
   handleAuthentication(user: User) {

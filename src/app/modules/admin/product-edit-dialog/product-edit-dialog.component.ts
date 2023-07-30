@@ -60,9 +60,6 @@ export class ProductEditDialogComponent implements OnInit {
   }
 
   onSaveProduct() {
-    //TODO:enhance observable
-    const productObservable = new Observable();
-
     if (this.productForm.valid) {
       if (!this.productEditData) {
         this.addProduct();
@@ -70,13 +67,11 @@ export class ProductEditDialogComponent implements OnInit {
         this.updateProduct();
       }
     }
-    console.log(this.productForm.value);
   }
 
   addProduct() {
     this.productService.addProduct(this.productForm.value).subscribe({
       next: (res) => {
-        console.log(res);
         this.productForm.reset();
         this.dialogRef.close('add');
         this.snackBarService.openSnackBar(
@@ -85,7 +80,6 @@ export class ProductEditDialogComponent implements OnInit {
         );
       },
       error: (error) => {
-        console.log(error);
         this.snackBarService.openSnackBar('Error in creating Product!');
       },
     });
@@ -96,7 +90,6 @@ export class ProductEditDialogComponent implements OnInit {
       .updateProduct({ ...this.productForm.value, id: this.productEditData.id })
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.productForm.reset();
           this.dialogRef.close('update');
           this.snackBarService.openSnackBar(
@@ -105,7 +98,6 @@ export class ProductEditDialogComponent implements OnInit {
           );
         },
         error: (error) => {
-          console.log(error);
           this.snackBarService.openSnackBar('Error in updating Product!');
         },
       });

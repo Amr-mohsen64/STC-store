@@ -31,19 +31,21 @@ export class ProductService {
     );
   }
 
-  addProduct(product: Product): Observable<any> {
-    return this.http.post<any>('https://fakestoreapi.com/products', product);
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(
+      'https://fakestoreapi.com/products',
+      product
+    );
   }
 
-  updateProduct(product: Product): Observable<any> {
-    console.log(product);
-    return this.http.put<any>(
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(
       `https://fakestoreapi.com/products/${product.id}`,
       product
     );
   }
 
-  deleteProduct(productId: number): Observable<any> {
+  deleteProduct(productId: number): Observable<Product> {
     return this.http.delete<Product>(
       `https://fakestoreapi.com/products/${productId}`
     );

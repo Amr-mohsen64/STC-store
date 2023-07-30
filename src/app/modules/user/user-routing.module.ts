@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { authGuard } from 'src/app/core/guards/auth.guard';
+import { permissionGuard } from 'src/app/core/guards/permission.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   {
     path: 'user-view/products',
     component: ProductsComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, permissionGuard],
+    data: { permissions: 'user' },
   },
 ];
 

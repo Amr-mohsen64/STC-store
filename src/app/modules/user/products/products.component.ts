@@ -34,7 +34,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllProducts();
     this.loadCategories();
-    console.log(this.selectedCategory);
   }
 
   loadCategories() {
