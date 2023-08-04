@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user.model';
-import { AuthService } from './../../../core/services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 const emptyUser: User = { name: '', password: '', permissions: [] };
 @Component({

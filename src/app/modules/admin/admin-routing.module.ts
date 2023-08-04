@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsAdminComponent } from './products-admin/products-admin.component';
 import { authGuard } from 'src/app/core/guards/auth.guard';
 import { permissionGuard } from 'src/app/core/guards/permission.guard';
+import { ProductsAdminComponent } from './components/products-admin/products-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/admin-view/products', pathMatch: 'full' },

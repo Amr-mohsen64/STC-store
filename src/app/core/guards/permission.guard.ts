@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { SnackBarService } from './../services/snack-bar.service';
+import { AuthService } from '../../modules/auth/services/auth/auth.service';
+import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 
 export const permissionGuard: CanActivateFn = (route, state) => {
   const router: Router = inject(Router);

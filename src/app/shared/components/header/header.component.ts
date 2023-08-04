@@ -1,5 +1,5 @@
-import { SnackBarService } from './../../../core/services/snack-bar.service';
-import { AuthService } from './../../../core/services/auth.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar/snack-bar.service';
+import { AuthService } from '../../../modules/auth/services/auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({

@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { ProductService } from 'src/app/core/services/product.service';
+import { ProductService } from 'src/app/core/services/product/product.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar/snack-bar.service';
 import { Product } from 'src/app/shared/models/product.model';
-import { SnackBarService } from './../../../core/services/snack-bar.service';
 
 @Component({
   selector: 'app-product-edit-dialog',

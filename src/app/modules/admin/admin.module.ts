@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsAdminComponent } from './products-admin/products-admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProductEditDialogComponent } from './product-edit-dialog/product-edit-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProductDeleteDialogComponent } from './product-delete-dialog/product-delete-dialog.component';
+import { ProductDeleteDialogComponent } from './components/product-delete-dialog/product-delete-dialog.component';
+import { ProductsAdminComponent } from './components/products-admin/products-admin.component';
+import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
 
 @NgModule({
-  declarations: [ProductsAdminComponent, ProductEditDialogComponent, ProductDeleteDialogComponent],
+  declarations: [
+    ProductsAdminComponent,
+    ProductEditDialogComponent,
+    ProductDeleteDialogComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/shared/models/product.model';
 import { ProductDeleteDialogComponent } from '../product-delete-dialog/product-delete-dialog.component';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
-import { LoaderService } from './../../../core/services/loader.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { LoaderService } from 'src/app/core/services/loader/loader.service';
+import { ProductService } from 'src/app/core/services/product/product.service';
 
 @Component({
   selector: 'app-products-admin',

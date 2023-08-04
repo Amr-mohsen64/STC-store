@@ -1,9 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from 'src/app/core/services/product.service';
+import { LoaderService } from 'src/app/core/services/loader/loader.service';
+import { ProductService } from 'src/app/core/services/product/product.service';
 import { Product } from 'src/app/shared/models/product.model';
-import { LoaderService } from './../../../core/services/loader.service';
 
 @Component({
   selector: 'app-products',

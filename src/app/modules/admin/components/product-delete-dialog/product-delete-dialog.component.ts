@@ -1,7 +1,7 @@
-import { SnackBarService } from './../../../core/services/snack-bar.service';
-import { ProductService } from 'src/app/core/services/product.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ProductService } from 'src/app/core/services/product/product.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar/snack-bar.service';
 
 @Component({
   selector: 'app-product-delete-dialog',

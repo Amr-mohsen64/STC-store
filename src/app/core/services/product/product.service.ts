@@ -1,3 +1,4 @@
+import { environment } from './../../../../enviroments/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,37 +11,37 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('https://fakestoreapi.com/products');
+    return this.http.get<Product[]>(`${environment.apiBaseUrl}/products`);
   }
 
   getProductsByCategory(categoryName: string): Observable<Product[]> {
     return this.http.get<Product[]>(
-      `https://fakestoreapi.com/products/category/${categoryName}`
+      `${environment.apiBaseUrl}/products/category/${categoryName}`
     );
   }
 
   getProductById(productId: number): Observable<Product> {
     return this.http.get<Product>(
-      `https://fakestoreapi.com/products/${productId}`
+      `${environment.apiBaseUrl}/products/${productId}`
     );
   }
 
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(
-      'https://fakestoreapi.com/products/categories'
+      `${environment.apiBaseUrl}/products/categories`
     );
   }
 
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(
-      'https://fakestoreapi.com/products',
+      `${environment.apiBaseUrl}/products`,
       product
     );
   }
 
   updateProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(
-      `https://fakestoreapi.com/products/${product.id}`,
+      `${environment.apiBaseUrl}/products/${product.id}`,
       product
     );
   }
