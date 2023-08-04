@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/product.model';
@@ -7,6 +7,8 @@ import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-
 import { animate, style, transition, trigger } from '@angular/animations';
 import { LoaderService } from 'src/app/core/services/loader/loader.service';
 import { ProductService } from 'src/app/core/services/product/product.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-products-admin',
@@ -25,7 +27,6 @@ import { ProductService } from 'src/app/core/services/product/product.service';
   ],
 })
 export class ProductsAdminComponent implements OnInit {
-  products$!: Observable<Product[]>;
   products: Product[] = [];
   displayedColumns: string[] = [
     'name',
@@ -35,6 +36,12 @@ export class ProductsAdminComponent implements OnInit {
     'image',
     'controls',
   ];
+  dataSource = new MatTableDataSource<Product>(this.products);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(
     private productService: ProductService,
@@ -43,7 +50,6 @@ export class ProductsAdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.productService.getProducts();
     this.getAllProducts();
   }
 
@@ -51,6 +57,8 @@ export class ProductsAdminComponent implements OnInit {
     this.loaderService.isLoading = true;
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
+      this.dataSource.data = this.products;
+      this.dataSource.paginator = this.paginator;
       this.loaderService.isLoading = false;
     });
   }
@@ -63,8 +71,8 @@ export class ProductsAdminComponent implements OnInit {
       .afterClosed()
       .subscribe((result: { value: string; data: Product }) => {
         if (result.value == 'add') {
-          this.products = [
-            ...this.products,
+          this.dataSource.data = [
+            ...this.dataSource.data,
             { ...result.data, id: this.generateRandomId() },
           ];
         }
@@ -81,7 +89,7 @@ export class ProductsAdminComponent implements OnInit {
       .subscribe((result: { value: string; data: Product }) => {
         if (result.value == 'update') {
           let copiedProducts = this.products;
-          let foundProductIndex = this.products.findIndex(
+          let foundProductIndex = this.dataSource.data.findIndex(
             (foundProduct) => foundProduct.id === product.id
           );
 
@@ -89,7 +97,7 @@ export class ProductsAdminComponent implements OnInit {
             ...result.data,
             id: product.id,
           };
-          this.products = [...copiedProducts];
+          this.dataSource.data = copiedProducts;
         }
       });
   }
@@ -103,7 +111,7 @@ export class ProductsAdminComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value == 'delete') {
-          this.products = this.products.filter(
+          this.dataSource.data = this.products.filter(
             (product) => product.id !== productId
           );
         }
