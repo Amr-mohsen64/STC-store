@@ -61,9 +61,12 @@ export class ProductsAdminComponent implements OnInit {
         minWidth: '30%',
       })
       .afterClosed()
-      .subscribe((value) => {
-        if (value == 'add') {
-          this.getAllProducts();
+      .subscribe((result: { value: string; data: Product }) => {
+        if (result.value == 'add') {
+          this.products = [
+            ...this.products,
+            { ...result.data, id: this.generateRandomId() },
+          ];
         }
       });
   }
@@ -72,12 +75,21 @@ export class ProductsAdminComponent implements OnInit {
     this.dialog
       .open(ProductEditDialogComponent, {
         minWidth: '30%',
-        data: product,
+        data: { ...product },
       })
       .afterClosed()
-      .subscribe((value) => {
-        if (value == 'update') {
-          this.getAllProducts();
+      .subscribe((result: { value: string; data: Product }) => {
+        if (result.value == 'update') {
+          let copiedProducts = this.products;
+          let foundProductIndex = this.products.findIndex(
+            (foundProduct) => foundProduct.id === product.id
+          );
+
+          copiedProducts[foundProductIndex] = {
+            ...result.data,
+            id: product.id,
+          };
+          this.products = [...copiedProducts];
         }
       });
   }
@@ -91,8 +103,19 @@ export class ProductsAdminComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value == 'delete') {
-          this.getAllProducts();
+          this.products = this.products.filter(
+            (product) => product.id !== productId
+          );
         }
       });
+  }
+
+  generateRandomId() {
+    const timestamp = new Date().getTime(); // Get current timestamp
+    const randomDecimal = Math.random(); // Generate a random decimal between 0 and 1
+    const randomNumber = Math.floor(randomDecimal * 1000000); // Convert the random decimal to a 6-digit number
+    const randomId = Number(`${timestamp}${randomNumber}`); // Concatenate timestamp and random number
+
+    return randomId;
   }
 }

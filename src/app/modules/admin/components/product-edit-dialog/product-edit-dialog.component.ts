@@ -71,8 +71,8 @@ export class ProductEditDialogComponent implements OnInit {
   addProduct() {
     this.productService.addProduct(this.productForm.value).subscribe({
       next: (res) => {
+        this.dialogRef.close({ value: 'add', data: this.productForm.value });
         this.productForm.reset();
-        this.dialogRef.close('add');
         this.snackBarService.openSnackBar(
           'Product Added Succesfully!',
           'blue-snackbar'
@@ -89,8 +89,11 @@ export class ProductEditDialogComponent implements OnInit {
       .updateProduct({ ...this.productForm.value, id: this.productEditData.id })
       .subscribe({
         next: (res) => {
+          this.dialogRef.close({
+            value: 'update',
+            data: this.productForm.value,
+          });
           this.productForm.reset();
-          this.dialogRef.close('update');
           this.snackBarService.openSnackBar(
             'Product updated Succesfully!',
             'blue-snackbar'
